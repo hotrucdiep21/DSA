@@ -1,18 +1,19 @@
-class hashTable {
+class HashTable {
     constructor(size) {
         this.data = new Array(size);
     }
 
     _hash(key) {
-        let hash = 0;
+        let address = 0;
         for (let i = 0; i < key.length; i++) {
-            hash = (hash + key.charCodeAt(i) * i) % this.data.length;
+            address = (address + key.charCodeAt(i) * i) % this.data.length;
         }
-    return hash;
+        return address;
     }
 
+
     set(key, value) {
-        const address = this._hash(key);
+        let address = this._hash(key);
         if (!this.data[address]) {
             this.data[address] = [];
         }
@@ -22,22 +23,48 @@ class hashTable {
 
     get(key) {
         const address = this._hash(key);
+        console.log(address)
         const currentBucket = this.data[address];
         if (currentBucket) {
-            for (let i = 0; i < currentBucket.length; i++) {
+            for (let i = 0; i < this.data.length; i++) {
                 if (currentBucket[i][0] === key) {
                     return currentBucket[i][1];
                 }
-                
             }
         }
-        return undefined
+
+        return undefined;
+    }
+
+    keys() {
+        const keys = [];
+
+        for (let i = 0; i < this.data.length; i++) {
+            if (this.data[i]) {
+                if (this.data[i].length > 1) {
+                    for (let j = 0; j < this.data[i].length; j++) {
+                        keys.push(this.data[i][j][0])
+                    }
+                }
+                keys.push(this.data[i][0][0])
+            }
+
+        }
+        return keys;
     }
 }
 
-const myHash =  new hashTable(50);
+const myHash = new HashTable(50);
 
-console.log(myHash.set("grapes", 9000));
-console.log(myHash.set("grape", 1000));
-console.log(" ------")
-console.log(myHash.get("grapes"))
+myHash.set("apple", 100);
+myHash.set("orange", 200);
+myHash.set("grapes", 100);
+myHash.set("banana", 900);
+myHash.set("banana", 900);
+myHash.set("banana", 900);
+myHash.set("banana", 900);
+myHash.set("banana", 900);
+
+
+console.log(myHash.keys());
+console.log(myHash.get("banana"))

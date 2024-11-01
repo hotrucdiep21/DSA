@@ -1,17 +1,9 @@
-
-function gA (strs) {
-    let map = {};
-
-    for (let str of strs) {
-        let sortedStr = str.split('').sort().join('');
-        if(map[sortedStr]) {
-            map[sortedStr].push(str)
-        }
-        else {
-            map[sortedStr] = [str];
-        }
-    }
-    return Object.values(map)
+const map = {
+    2: 3,
+    3: 4
 }
 
-console.log(gA(["eat","tea","tan","ate","nat","bat"]))
+map["5"] = 0;
+
+map["5"]++;
+console.log(map["5"])
