@@ -36,7 +36,7 @@ let initRoman = function (num) {
     return romanString;
 };
 
-const str = initRoman(3749);
+const str = initRoman(45);
 console.log(str); // Output: "MMMDCCXLIX"
 
 
